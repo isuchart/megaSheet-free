@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- mathjax -->
+    <!-- <script>
+        MathJax = {
+          loader: {load: ['input/asciimath', 'output/chtml']}
+        }
+        </script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script type="text/javascript" id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/startup.js">
+    </script> -->
+
+    <!-- KaTeX  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
+    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" crossorigin="anonymous">
+  <!-- <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
+    integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous">
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous">
+  </script> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: true},
+              {left: '\\[', right: '\\]', display: true},
+              {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+              {left: "\\begin{align}", right: "\\end{align}", display: true},
+              {left: "\\begin{align*}", right: "\\end{align*}", display: true},
+              {left: "\\begin{aligned}", right: "\\end{aligned}", display: true},
+              {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},
+              {left: "\\begin{alignat*}", right: "\\end{alignat*}", display: true},
+              {left: "\\begin{gather}", right: "\\end{gather}", display: true},
+              {left: "\\begin{CD}", right: "\\end{CD}", display: true},
+              {left: "\\[", right: "\\]", display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+  </script>
+
+    <!-- fontawsome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <button class="btn-hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h2>iSuchart</h2>
+        <ul>
+            <!-- <li><a href="#">home</a></li> -->
+            <!-- <li><a href="#">about</a></li> -->
+            <li id="np"><a href="#" onclick="resetPageNo()">กำหนดเลขที่ใหม่</a></li>
+            <li id="nq"><a href="#" onclick="newQuestion()">ตั้งโจทย์ใหม่</a></li>
+            <li id="aq"><a href="#" onclick="toggleDisplay()">โจทย์/เฉลย</a></li>
+            <li id="pq"><a href="#" onclick="prnExam()">พิมพ์</a></li>
+            <li id="sn"><a href="#" class="btn-signin" onclick="signinFn()">Sign in</a></li>
+        </ul>
+   </nav>
+   <div id="welcome" style="display: none;">
+       <h1>ยินดีต้อนรับ</h1>
+       <h1>เข้าสู่</h1>
+       <h1>เว็บไซต์</h1>
+       <h1>ใบงานแบบไดนามิค</h1>
+       <h1>วิชาคณิตศาสตร์</h1>
+       <h1>ระดับมัธยมศึกษา</h1>
+   </div>
+   <form id="login" onsubmit="displayExam(this)" style="display: none;">
+        <input type="text" id="user" placeholder="ชื่อผู้ใช้">
+        <input type="text" id="password" placeholder="รหัสผ่าน">
+        <button type="submit">Log in</button>
+   </form>
+    <div class="page-exam" id="page-exam">
+        <!-- <div class="page-exam" style="display: none;"> -->
+        <div class="page-header">
+            <h3 id="header1"></h3><br>
+            <p id="header2"></p>
+        </div>
+    </div>
+   <div class="page-answer" id="page-answer" style="display: block;">
+        <div class="page-header">
+            <h3 id="header3"></h3><br>
+            <p id="header4"></p>
+        </div>
+   </div>
+
+   <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
+   integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous">
+ </script>
+ <script src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+   integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous">
+ </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="myFunction.js"></script>
+    <script src="makePage.js"></script>
+    <script src="examData.js"></script>
+    <!-- <script src="examStruc.js"></script> -->
+    <script src="script.js"></script>
+    
+</body>
+</html>
